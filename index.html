@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outreach Budget Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .input-group {
+            margin-bottom: 40px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            transition: border-color 0.2s;
+        }
+        
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #4285f4;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .cost-breakdown {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+        }
+        
+        .cost-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cost-item strong {
+            font-weight: 600;
+        }
+        
+        .total {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-top: 10px;
+            border-top: 2px solid #333;
+        }
+        
+        .metrics {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .metric-label {
+            color: #666;
+        }
+        
+        .metric-value {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .linkedin-note {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .range {
+            color: #4285f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Outreach Budget Calculator</h1>
+        <p class="subtitle">API-Driven Automated Workflow Budget Estimate</p>
+        
+        <div class="input-group">
+            <label for="leads">Number of Leads</label>
+            <input type="number" id="leads" min="1" value="1000" placeholder="Enter number of leads">
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Tech Stack Cost Breakdown</div>
+            <div class="cost-breakdown">
+                <div class="cost-item">
+                    <span>Google Custom Search API</span>
+                    <span id="gcsaCost">$5.00</span>
+                </div>
+                <div class="cost-item">
+                    <span>Apify LinkedIn Company Scraper</span>
+                    <span id="apifyCost">$30.00</span>
+                </div>
+                <div class="cost-item">
+                    <span>Namecheap Domains</span>
+                    <span id="namecheapCost">$20.00</span>
+                </div>
+                <div class="cost-item">
+                    <span>Instantly.ai</span>
+                    <span id="instantlyCost">$37.00</span>
+                </div>
+                <div class="cost-item">
+                    <span>Perplexity API</span>
+                    <span id="perplexityCost">$5.00</span>
+                </div>
+                <div class="cost-item">
+                    <span>GPT-4 API</span>
+                    <span id="gptCost">$5.00</span>
+                </div>
+                <div class="cost-item">
+                    <span>AnyMailFinder</span>
+                    <span id="anymailCost">$50.00</span>
+                </div>
+                <div class="cost-item">
+                    <span>Airtable CRM</span>
+                    <span id="airtableCost">Free</span>
+                </div>
+                <div class="cost-item">
+                    <span>n8n Orchestrator</span>
+                    <span>Free (local)</span>
+                </div>
+                <div class="total">
+                    <span>Monthly Total</span>
+                    <span id="totalCost">$152.00</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Email Campaign Projections</div>
+            <div class="metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Emails Sent</span>
+                    <span class="metric-value" id="emailsSent">1,000</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Open Rate</span>
+                    <span class="metric-value range"><span id="emailOpensMin">350</span> - <span id="emailOpensMax">550</span> (35-55%)</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Reply Rate</span>
+                    <span class="metric-value range"><span id="emailRepliesMin">20</span> - <span id="emailRepliesMax">50</span> (2-5%)</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Positive Replies</span>
+                    <span class="metric-value range"><span id="emailPositiveMin">6</span> - <span id="emailPositiveMax">20</span> (30-40%)</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Meetings Booked</span>
+                    <span class="metric-value range"><span id="emailMeetingsMin">3</span> - <span id="emailMeetingsMax">10</span> (50%)</span>
+                </div>
+            </div>
+            <div class="note">
+                <strong>Note:</strong> Rates vary based on target audience quality, messaging, and industry. B2B pharma/biotech typically sees conservative conversion rates.
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">LinkedIn Outreach Strategy</div>
+            <div class="linkedin-note">
+                <strong>Phase 1 (Weeks 1-2):</strong> Manual outreach with personalized connection requests to build foundation safely.<br><br>
+                <strong>Phase 2 (Week 3+):</strong> Transition to <strong>Expandi.io</strong> ($99/month) for safe automation with the following projections:
+            </div>
+            <div class="metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Connection Requests (15/day)</span>
+                    <span class="metric-value" id="linkedinRequests">450/month</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Accept Rate</span>
+                    <span class="metric-value range"><span id="linkedinAcceptsMin">135</span> - <span id="linkedinAcceptsMax">180</span> (30-40%)</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Reply Rate</span>
+                    <span class="metric-value range"><span id="linkedinRepliesMin">20</span> - <span id="linkedinRepliesMax">36</span> (15-20%)</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Positive Replies</span>
+                    <span class="metric-value range"><span id="linkedinPositiveMin">6</span> - <span id="linkedinPositiveMax">14</span> (30-40%)</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Meetings Booked</span>
+                    <span class="metric-value range"><span id="linkedinMeetingsMin">3</span> - <span id="linkedinMeetingsMax">7</span> (50%)</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Combined Results</div>
+            <div class="metrics">
+                <div class="metric-row">
+                    <span class="metric-label">Total Monthly Meetings</span>
+                    <span class="metric-value range"><span id="totalMeetingsMin">6</span> - <span id="totalMeetingsMax">17</span></span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Cost Per Meeting</span>
+                    <span class="metric-value range">$<span id="costPerMeetingMin">8.94</span> - $<span id="costPerMeetingMax">25.33</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const input = document.getElementById('leads');
+        
+        function calculateCosts() {
+            const leads = parseInt(input.value) || 0;
+            
+            // Calculate individual costs
+            const gcsaCost = Math.ceil(leads / 1000) * 5;
+            const apifyCost = 29 + (leads * 0.001);
+            const namecheapCost = Math.ceil(leads / 500) * 10;
+            
+            let instantlyCost;
+            if (leads <= 1000) instantlyCost = 37;
+            else if (leads <= 25000) instantlyCost = 97;
+            else instantlyCost = 358;
+            
+            const perplexityCost = Math.ceil(leads / 1000) * 5;
+            const gptCost = Math.ceil(leads / 1000) * 5;
+            const anymailCost = 50;
+            
+            let airtableCost;
+            let airtableCostText;
+            if (leads <= 1000) {
+                airtableCost = 0;
+                airtableCostText = 'Free';
+            } else if (leads <= 25000) {
+                airtableCost = 24;
+                airtableCostText = '$24.00';
+            } else {
+                airtableCost = 54;
+                airtableCostText = '$54.00';
+            }
+            
+            const totalCost = gcsaCost + apifyCost + namecheapCost + instantlyCost + 
+                            perplexityCost + gptCost + anymailCost + airtableCost;
+            
+            // Update costs
+            document.getElementById('gcsaCost').textContent = `$${gcsaCost.toFixed(2)}`;
+            document.getElementById('apifyCost').textContent = `$${apifyCost.toFixed(2)}`;
+            document.getElementById('namecheapCost').textContent = `$${namecheapCost.toFixed(2)}`;
+            document.getElementById('instantlyCost').textContent = `$${instantlyCost.toFixed(2)}`;
+            document.getElementById('perplexityCost').textContent = `$${perplexityCost.toFixed(2)}`;
+            document.getElementById('gptCost').textContent = `$${gptCost.toFixed(2)}`;
+            document.getElementById('anymailCost').textContent = `$${anymailCost.toFixed(2)}`;
+            document.getElementById('airtableCost').textContent = airtableCostText;
+            document.getElementById('totalCost').textContent = `$${totalCost.toFixed(2)}`;
+            
+            // Email metrics
+            const emailsSent = leads;
+            const emailOpensMin = Math.round(emailsSent * 0.35);
+            const emailOpensMax = Math.round(emailsSent * 0.55);
+            const emailRepliesMin = Math.round(emailsSent * 0.02);
+            const emailRepliesMax = Math.round(emailsSent * 0.05);
+            const emailPositiveMin = Math.round(emailRepliesMin * 0.30);
+            const emailPositiveMax = Math.round(emailRepliesMax * 0.40);
+            const emailMeetingsMin = Math.round(emailPositiveMin * 0.50);
+            const emailMeetingsMax = Math.round(emailPositiveMax * 0.50);
+            
+            document.getElementById('emailsSent').textContent = emailsSent.toLocaleString();
+            document.getElementById('emailOpensMin').textContent = emailOpensMin.toLocaleString();
+            document.getElementById('emailOpensMax').textContent = emailOpensMax.toLocaleString();
+            document.getElementById('emailRepliesMin').textContent = emailRepliesMin.toLocaleString();
+            document.getElementById('emailRepliesMax').textContent = emailRepliesMax.toLocaleString();
+            document.getElementById('emailPositiveMin').textContent = emailPositiveMin.toLocaleString();
+            document.getElementById('emailPositiveMax').textContent = emailPositiveMax.toLocaleString();
+            document.getElementById('emailMeetingsMin').textContent = emailMeetingsMin.toLocaleString();
+            document.getElementById('emailMeetingsMax').textContent = emailMeetingsMax.toLocaleString();
+            
+            // LinkedIn metrics (fixed at 450 requests/month = 15/day)
+            const linkedinRequests = 450;
+            const linkedinAcceptsMin = Math.round(linkedinRequests * 0.30);
+            const linkedinAcceptsMax = Math.round(linkedinRequests * 0.40);
+            const linkedinRepliesMin = Math.round(linkedinAcceptsMin * 0.15);
+            const linkedinRepliesMax = Math.round(linkedinAcceptsMax * 0.20);
+            const linkedinPositiveMin = Math.round(linkedinRepliesMin * 0.30);
+            const linkedinPositiveMax = Math.round(linkedinRepliesMax * 0.40);
+            const linkedinMeetingsMin = Math.round(linkedinPositiveMin * 0.50);
+            const linkedinMeetingsMax = Math.round(linkedinPositiveMax * 0.50);
+            
+            document.getElementById('linkedinRequests').textContent = linkedinRequests.toLocaleString();
+            document.getElementById('linkedinAcceptsMin').textContent = linkedinAcceptsMin.toLocaleString();
+            document.getElementById('linkedinAcceptsMax').textContent = linkedinAcceptsMax.toLocaleString();
+            document.getElementById('linkedinRepliesMin').textContent = linkedinRepliesMin.toLocaleString();
+            document.getElementById('linkedinRepliesMax').textContent = linkedinRepliesMax.toLocaleString();
+            document.getElementById('linkedinPositiveMin').textContent = linkedinPositiveMin.toLocaleString();
+            document.getElementById('linkedinPositiveMax').textContent = linkedinPositiveMax.toLocaleString();
+            document.getElementById('linkedinMeetingsMin').textContent = linkedinMeetingsMin.toLocaleString();
+            document.getElementById('linkedinMeetingsMax').textContent = linkedinMeetingsMax.toLocaleString();
+            
+            // Combined totals (including Expandi.io cost)
+            const totalCostWithExpandi = totalCost + 99;
+            const totalMeetingsMin = emailMeetingsMin + linkedinMeetingsMin;
+            const totalMeetingsMax = emailMeetingsMax + linkedinMeetingsMax;
+            const costPerMeetingMin = totalMeetingsMax > 0 ? (totalCostWithExpandi / totalMeetingsMax) : 0;
+            const costPerMeetingMax = totalMeetingsMin > 0 ? (totalCostWithExpandi / totalMeetingsMin) : 0;
+            
+            document.getElementById('totalMeetingsMin').textContent = totalMeetingsMin.toLocaleString();
+            document.getElementById('totalMeetingsMax').textContent = totalMeetingsMax.toLocaleString();
+            document.getElementById('costPerMeetingMin').textContent = costPerMeetingMin.toFixed(2);
+            document.getElementById('costPerMeetingMax').textContent = costPerMeetingMax.toFixed(2);
+        }
+        
+        input.addEventListener('input', calculateCosts);
+        calculateCosts();
+    </script>
+</body>
+</html>
