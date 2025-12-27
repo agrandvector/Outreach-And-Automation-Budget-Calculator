@@ -77,6 +77,41 @@
             border-bottom: 2px solid #f0f0f0;
         }
         
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        th {
+            text-align: left;
+            padding: 12px 8px;
+            background: #f5f5f5;
+            font-weight: 600;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        td {
+            padding: 12px 8px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .total-row {
+            font-weight: 700;
+            font-size: 16px;
+            background: #fafafa;
+        }
+        
+        .total-row td {
+            padding: 15px 8px;
+            border-top: 2px solid #333;
+        }
+        
         .cost-breakdown {
             background: #fafafa;
             padding: 20px;
@@ -171,47 +206,80 @@
         
         <div class="section">
             <div class="section-title">Tech Stack Cost Breakdown</div>
-            <div class="cost-breakdown">
-                <div class="cost-item">
-                    <span>Google Custom Search API</span>
-                    <span id="gcsaCost">$5.00</span>
-                </div>
-                <div class="cost-item">
-                    <span>Apify LinkedIn Company Scraper</span>
-                    <span id="apifyCost">$30.00</span>
-                </div>
-                <div class="cost-item">
-                    <span>Namecheap Domains</span>
-                    <span id="namecheapCost">$20.00</span>
-                </div>
-                <div class="cost-item">
-                    <span>Instantly.ai</span>
-                    <span id="instantlyCost">$37.00</span>
-                </div>
-                <div class="cost-item">
-                    <span>Perplexity API</span>
-                    <span id="perplexityCost">$5.00</span>
-                </div>
-                <div class="cost-item">
-                    <span>GPT-4 API</span>
-                    <span id="gptCost">$5.00</span>
-                </div>
-                <div class="cost-item">
-                    <span>AnyMailFinder</span>
-                    <span id="anymailCost">$50.00</span>
-                </div>
-                <div class="cost-item">
-                    <span>Airtable CRM</span>
-                    <span id="airtableCost">Free</span>
-                </div>
-                <div class="cost-item">
-                    <span>n8n Orchestrator</span>
-                    <span>Free (local)</span>
-                </div>
-                <div class="total">
-                    <span>Monthly Total</span>
-                    <span id="totalCost">$152.00</span>
-                </div>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tool</th>
+                            <th>Used For</th>
+                            <th>Cost</th>
+                            <th style="width: 35%;">Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Google Custom Search API</td>
+                            <td>Sourcing</td>
+                            <td id="gcsaCost">$5.00</td>
+                            <td>Highly specific searches to identify target companies in the US</td>
+                        </tr>
+                        <tr>
+                            <td>Apify LinkedIn Scraper</td>
+                            <td>Sourcing</td>
+                            <td id="apifyCost">$30.00</td>
+                            <td>Scrapes results from Google Search to extract domains and key company info</td>
+                        </tr>
+                        <tr>
+                            <td>Namecheap Domains</td>
+                            <td>Email Outreach</td>
+                            <td id="namecheapCost">$20.00</td>
+                            <td>Trusted domain provider, disable WHOIS for privacy and transparency</td>
+                        </tr>
+                        <tr>
+                            <td>Instantly.ai</td>
+                            <td>Email Outreach</td>
+                            <td id="instantlyCost">$37.00</td>
+                            <td>Handles smart email warm-up with rotation, runs outbound email campaigns, and ensures SPF, DKIM, DMARC are configured (API access requires $97+ plan)</td>
+                        </tr>
+                        <tr>
+                            <td>Perplexity API</td>
+                            <td>Enrichment</td>
+                            <td id="perplexityCost">$5.00</td>
+                            <td>Researcher and information gathering</td>
+                        </tr>
+                        <tr>
+                            <td>OpenAI API</td>
+                            <td>AI Personalization</td>
+                            <td id="gptCost">$5.00</td>
+                            <td>Generates email copy, personalized outreach messages, and content variations</td>
+                        </tr>
+                        <tr>
+                            <td>AnyMailFinder</td>
+                            <td>Deliverability</td>
+                            <td id="anymailCost">$89.00</td>
+                            <td>Verifies emails of decision-makers, pay only for verified addresses</td>
+                        </tr>
+                        <tr>
+                            <td>Airtable CRM</td>
+                            <td>Analytics</td>
+                            <td id="airtableCost">Free</td>
+                            <td>CRM interface with AI-assisted analytics and reporting</td>
+                        </tr>
+                        <tr>
+                            <td>n8n (VPS)</td>
+                            <td>Orchestration</td>
+                            <td>$20.00</td>
+                            <td>Automation engine to connect all tools and workflows (requires $20 VPS to run 24/7)</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="2">Monthly Total</td>
+                            <td colspan="2" id="totalCost">$171.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="note">
+                <strong>Legal Compliance:</strong> Accessing publicly indexed data for B2B email outreach is legally permissible in the US (California excluded) when emails are sent in compliance with the CAN-SPAM Act.
             </div>
         </div>
         
@@ -248,7 +316,8 @@
             <div class="section-title">LinkedIn Outreach Strategy</div>
             <div class="linkedin-note">
                 <strong>Phase 1 (Weeks 1-2):</strong> Manual outreach with personalized connection requests to build foundation safely.<br><br>
-                <strong>Phase 2 (Week 3+):</strong> Transition to <strong>Expandi.io</strong> ($99/month) for safe automation with the following projections:
+                <strong>Phase 2 (Week 3-4):</strong> Transition to <strong>Expandi.io</strong> ($99/month) for safe automation.<br><br>
+                <strong>Phase 3 (Week 5+):</strong> Leverage <strong>LinkedIn Sales Navigator</strong> ($100/month) for advanced lead filtering and deeper prospect insights.
             </div>
             <div class="metrics">
                 <div class="metric-row">
@@ -272,18 +341,33 @@
                     <span class="metric-value range"><span id="linkedinMeetingsMin">3</span> - <span id="linkedinMeetingsMax">7</span> (50%)</span>
                 </div>
             </div>
+            <div class="note">
+                <strong>GDPR Compliance:</strong> LinkedIn workflows using Sales Navigator and Expandi to engage prospects directly on the platform, aligned with GDPR regulations.
+            </div>
         </div>
         
         <div class="section">
             <div class="section-title">Combined Results</div>
             <div class="metrics">
                 <div class="metric-row">
+                    <span class="metric-label">Tech Stack Monthly Cost</span>
+                    <span class="metric-value">$<span id="techStackTotal">191.00</span></span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">LinkedIn Tools (Expandi + Sales Navigator)</span>
+                    <span class="metric-value">$199.00</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Combined Monthly Cost</span>
+                    <span class="metric-value">$<span id="combinedTotalCost">390.00</span></span>
+                </div>
+                <div class="metric-row">
                     <span class="metric-label">Total Monthly Meetings</span>
                     <span class="metric-value range"><span id="totalMeetingsMin">6</span> - <span id="totalMeetingsMax">17</span></span>
                 </div>
                 <div class="metric-row">
                     <span class="metric-label">Cost Per Meeting</span>
-                    <span class="metric-value range">$<span id="costPerMeetingMin">8.94</span> - $<span id="costPerMeetingMax">25.33</span></span>
+                    <span class="metric-value range">$<span id="costPerMeetingMin">22.94</span> - $<span id="costPerMeetingMax">65.00</span></span>
                 </div>
             </div>
         </div>
@@ -307,7 +391,16 @@
             
             const perplexityCost = Math.ceil(leads / 1000) * 5;
             const gptCost = Math.ceil(leads / 1000) * 5;
-            const anymailCost = 50;
+            
+            let anymailCost;
+            if (leads <= 25) anymailCost = 14;
+            else if (leads <= 200) anymailCost = 29;
+            else if (leads <= 500) anymailCost = 49;
+            else if (leads <= 1000) anymailCost = 89;
+            else if (leads <= 2500) anymailCost = 149;
+            else if (leads <= 5000) anymailCost = 199;
+            else if (leads <= 12500) anymailCost = 299;
+            else anymailCost = 499;
             
             let airtableCost;
             let airtableCostText;
@@ -323,7 +416,7 @@
             }
             
             const totalCost = gcsaCost + apifyCost + namecheapCost + instantlyCost + 
-                            perplexityCost + gptCost + anymailCost + airtableCost;
+                            perplexityCost + gptCost + anymailCost + airtableCost + 20; // +20 for n8n VPS
             
             // Update costs
             document.getElementById('gcsaCost').textContent = `$${gcsaCost.toFixed(2)}`;
@@ -378,13 +471,16 @@
             document.getElementById('linkedinMeetingsMin').textContent = linkedinMeetingsMin.toLocaleString();
             document.getElementById('linkedinMeetingsMax').textContent = linkedinMeetingsMax.toLocaleString();
             
-            // Combined totals (including Expandi.io cost)
-            const totalCostWithExpandi = totalCost + 99;
+            // Combined totals (including Expandi.io + Sales Navigator)
+            const linkedInToolsCost = 99 + 100; // Expandi + Sales Navigator
+            const totalCostWithLinkedIn = totalCost + linkedInToolsCost;
             const totalMeetingsMin = emailMeetingsMin + linkedinMeetingsMin;
             const totalMeetingsMax = emailMeetingsMax + linkedinMeetingsMax;
-            const costPerMeetingMin = totalMeetingsMax > 0 ? (totalCostWithExpandi / totalMeetingsMax) : 0;
-            const costPerMeetingMax = totalMeetingsMin > 0 ? (totalCostWithExpandi / totalMeetingsMin) : 0;
+            const costPerMeetingMin = totalMeetingsMax > 0 ? (totalCostWithLinkedIn / totalMeetingsMax) : 0;
+            const costPerMeetingMax = totalMeetingsMin > 0 ? (totalCostWithLinkedIn / totalMeetingsMin) : 0;
             
+            document.getElementById('techStackTotal').textContent = totalCost.toFixed(2);
+            document.getElementById('combinedTotalCost').textContent = totalCostWithLinkedIn.toFixed(2);
             document.getElementById('totalMeetingsMin').textContent = totalMeetingsMin.toLocaleString();
             document.getElementById('totalMeetingsMax').textContent = totalMeetingsMax.toLocaleString();
             document.getElementById('costPerMeetingMin').textContent = costPerMeetingMin.toFixed(2);
